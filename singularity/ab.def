@@ -1,0 +1,37 @@
+Bootstrap: localimage
+From: a.sif
+
+%runscript
+    /bin/bash "$@"
+
+%post
+    # ---------- Install R and dependencies ----------
+    apt -y install r-base
+    Rscript -e "install.packages('foreach')"
+    Rscript -e "install.packages('reshape2')"
+    Rscript -e "install.packages('ggplot2')"
+    Rscript -e "install.packages('rmarkdown')"
+    Rscript -e "install.packages('knitr')"
+    Rscript -e "install.packages('testthat')"
+    apt-get -y install libssl-dev
+    Rscript -e "install.packages('tidyverse')"
+    Rscript -e "install.packages('devtools')"
+    Rscript -e "install.packages('pbapply')"
+    Rscript -e "install.packages('iterators')"
+    Rscript -e "install.packages('doParallel')"
+    Rscript -e "install.packages('forecast')"
+    Rscript -e "install.packages('sde')"
+    Rscript -e "install.packages('zoo')"
+    Rscript -e "install.packages('imputeTS')"
+    Rscript -e "install.packages('signal')"
+    Rscript -e "install.packages('GGally')"
+    Rscript -e "install.packages('profvis')"
+    Rscript -e "library(devtools);install_github('bfast2/strucchange')"
+    Rscript -e "library(devtools);install_github('bfast2/bfast')"
+    Rscript -e "install.packages('raster')"
+
+%environment
+    export LC_ALL=C
+
+%help
+    This singularity containers uses Ubuntu 18.04 bionic beaver as OS. The following software are installed: (i) R 4.0.2 (including the following libraries: foreach, reshape2, ggplot2, rmarkdown, knitr, testthat, tidyverse, devtools, pbapply, iterators, doParallel, forecast, sde, zoo, imputeTS, signal, GGally, profvis, strucchange, bfast, raster).

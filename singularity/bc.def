@@ -1,0 +1,32 @@
+Bootstrap: localimage
+From: b.sif
+
+%runscript
+    /bin/bash "$@"
+
+%post
+    # ---------- Install OpenCV and dependencies ----------
+    apt-get -y install cmake git libgtk2.0-dev pkg-config libavcodec-dev libavformat-dev libswscale-dev
+    apt-get -y install libtbb2 libtbb-dev libjpeg-dev libpng-dev libtiff-dev libdc1394-22-dev
+    apt -y install parallel libgsl0-dev curl lockfile-progs rename
+    apt-key adv --keyserver keyserver.ubuntu.com --recv-keys C93AF1698685AD8B
+    add-apt-repository "deb http://ftp.fau.de/trinity/trinity-builddeps-r14.0.0/ubuntu/ bionic main"
+    apt update
+    apt -y install libjasper-dev
+    mkdir code
+    cd code
+    git clone https://github.com/opencv/opencv.git
+    git clone https://github.com/opencv/opencv_contrib.git
+    cd opencv
+    mkdir build
+    cd build
+    cmake -D CMAKE_BUILD_TYPE=Release -D CMAKE_INSTALL_PREFIX=/usr/local ..
+    make -j7
+    make install
+
+
+%environment
+    export LC_ALL=C
+
+%help
+    This singularity containers uses Ubuntu 18.04 bionic beaver as OS. The following software are installed: (i) R 4.0.2 (including the following libraries: foreach, reshape2, ggplot2, rmarkdown, knitr, testthat, tidyverse, devtools, pbapply, iterators, doParallel, forecast, sde, zoo, imputeTS, signal, GGally, profvis, strucchange, bfast, raster). Open CV 4.1 and FORCE dependencies are installed.
