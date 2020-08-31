@@ -20,7 +20,7 @@ c+
 - R packages needed for makeDataCube
 - FORCE dependencies
 - python packages needed for makeDataCube
-## de
+## e
 d+
 - R makeDataCube package (commit 971bb08)
 - FORCE 
