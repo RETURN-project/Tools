@@ -1,0 +1,19 @@
+Bootstrap: localimage
+From: de.sif
+
+%post
+    # ---------- add dependency pylandsat ----------
+    pip install python-dateutil
+    apt -y install python3-pip
+    pip3 install pylandsat
+    pip3 install python-dateutil
+    apt-get install sqlite3
+    apt-get install libsqlite3-mod-spatialite
+    ln -s /usr/lib/x86_64-linux-gnu/mod_spatialite.so /usr/lib/x86_64-linux-gnu/mod_spatialite
+    
+%environment
+    export LC_ALL=C.UTF-8
+    export LANG=C.UTF-8
+    
+%help
+    This singularity container uses Ubuntu 18.04 bionic beaver as OS. The following software are installed: (i) R 4.0.2 (including the following libraries: foreach, reshape2, ggplot2, rmarkdown, knitr, testthat, tidyverse, devtools, pbapply, iterators, doParallel, forecast, sde, zoo, imputeTS, signal, GGally, profvis, strucchange, bfast, raster, sys, getPass, httr, RCurl, tidyverse, sf, readtext, rgdal, lubridate, reticulate), (ii) FORCE (FORCE v. 3.4.0; https://force-eo.readthedocs.io/en/latest/) and dependencies, (iii) Python 2 and 3 (including the packages 'pylandsat' and 'shapely').
