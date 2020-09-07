@@ -10,6 +10,8 @@ From: de.sif
     apt-get install sqlite3
     apt-get install libsqlite3-mod-spatialite
     ln -s /usr/lib/x86_64-linux-gnu/mod_spatialite.so /usr/lib/x86_64-linux-gnu/mod_spatialite
+    # ---------- add R library ----------
+    Rscript -e "library(devtools);install_github('s-u/unixtools')"
     
 %environment
     export LC_ALL=C.UTF-8
