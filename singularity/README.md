@@ -32,6 +32,11 @@ e+
 ## g
 f+
 - BenchmarkRecovery package (commit 060dffc)
+## h
+f+
+- R terra package 
+- updated version of gdal 
+- updated version of makeDateCube package (commit e0f72fd)
 
 # Naming convention
 ![image](img/diagram.png)
