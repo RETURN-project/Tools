@@ -2,6 +2,14 @@ Bootstrap: localimage
 From: ef.sif
 
 %post
+    # ---------- Update R ----------
+    apt-key adv --keyserver keyserver.ubuntu.com --recv-keys E298A3A825C0D65DFD57CBB651716619E084DAB9
+    apt -y update
+    apt-get -y install r-base r-base-dev
+    apt-get -y upgrade
+    apt-get remove -y 'r-cran-*'
+    Rscript -e "update.packages(ask = FALSE)"
+
     # ---------- install terra R package with latest version of gdal ----------
     apt -y remove libgdal-dev
     apt -y remove libproj-dev
@@ -14,9 +22,10 @@ From: ef.sif
     apt -y update
     apt-get -y install gdal-bin proj-bin libgdal-dev libproj-dev libgeos-dev
     
-    Rscript -e "install.packages(c('raster', 'Rcpp'))"
     apt-get -y install gdal-bin proj-bin libgdal-dev libproj-dev libgeos-dev
-    Rscript -e "install.packages('rgdal')"
+    Rscript -e "install.packages('nlme')"
+    Rscript -e "install.packages('KernSmooth')"
+    Rscript -e "install.packages(c('forecast', 'sf', 'rgdal','raster', 'Rcpp'))"
     Rscript -e "install.packages('terra')"
     
     # ---------- update makeDataCube package (commit 9edb2aa) ----------
