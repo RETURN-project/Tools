@@ -36,7 +36,11 @@ f+
 f+
 - R terra package 
 - updated version of gdal 
-- updated version of makeDateCube package (commit e0f72fd)
+- updated version of makeDateCube package (commit 02769e42849634739bf33c40f580ebb4906a253d)
+## i
+h+
+- updated version of FORCE (note: part of the installation needs to be done in a sandbox (see comment in hi.def file))
+- updated version of makeDateCube package
 
 # Naming convention
 ![image](img/diagram.png)
