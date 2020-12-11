@@ -4,7 +4,10 @@ From: fh.sif
 %post
       
     # ---------- Install FORCE ----------
-    bash -c "rm -rf force && git clone https://github.com/davidfrantz/force.git && cd force && make -j && make install"
+    bash -c "rm -rf force && git clone --branch develop https://github.com/ernstste/force.git && cd force"
+    # THE FOLLOWING COMMAND SHOULD BE RUN IN A SANDBOX, INTERACTION REQUIRED 
+    # vim makeFile # change bindir value to /usr/local/bin
+    # bash -c "make -j && make install"
     
     # ---------- Installing gsutil (required to download data from Google Cloud using FORCE) ----------
     # THE FOLLOWING COMMANDS SHOULD BE RUN IN A SANDBOX, INTERACTION REQUIRED 
@@ -19,9 +22,10 @@ From: fh.sif
     Rscript -e "library(devtools);install_github('RETURN-project/makeDataCube')"
     
 %files
-   # ---------- add netrc and laads file (needed to download data when building a data cube) ----------
+   # ---------- add netrc, laads, and boto file (needed to download data when building a data cube) ----------
     /home/wanda/.netrc /home
     /home/wanda/.laads /home
+    /home/wanda/.boto /home
     
 %help
     This singularity container uses Ubuntu 18.04 bionic beaver as OS. The following software are installed: (i) R 4.0.2 (including the following libraries: foreach, reshape2, ggplot2, rmarkdown, knitr, testthat, tidyverse, devtools, pbapply, iterators, doParallel, forecast, sde, zoo, imputeTS, signal, GGally, profvis, strucchange, bfast, raster, sys, getPass, httr, RCurl, tidyverse, sf, readtext, rgdal, lubridate, reticulate), (ii) FORCE (FORCE v. 3.4.0; https://force-eo.readthedocs.io/en/latest/) and dependencies, (iii) Python 2 and 3 (including the packages 'pylandsat' and 'shapely').
