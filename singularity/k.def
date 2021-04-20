@@ -3,9 +3,6 @@ From: davidfrantz/force:dev
 
 %post
       
-    # ---------- Install FORCE ----------
-    # singularity build k.sif docker://davidfrantz/force:dev
-
     # ---------- Install system packages ----------
     #apt-get -y install software-properties-common
     mkdir -p /var/cache/apt/archives/partial
@@ -22,12 +19,28 @@ From: davidfrantz/force:dev
     add-apt-repository -y ppa:ubuntugis/ubuntugis-unstable
     apt-cache policy libgdal-dev
     apt -y update
-    apt-get -y install gdal-bin proj-bin libgdal-dev libproj-dev libgeos-dev
+    apt-get -y install proj-bin  libproj-dev libgeos-dev gdal-bin libgdal-dev
     #apt-get -y install python-gdal
     apt-get -y install python-dev python-numpy
     apt-get -y install python3-dev python3-numpy
     apt -y update
     apt -y upgrade
+
+    # ---------- Install FORCE ----------
+    bash -c "rm -rf force && git clone --branch master https://github.com/PabRod/force.git"
+    #.git && cd force    
+    # IF NOT ALREADY OK, THE FOLLOWING COMMAND SHOULD BE RUN IN A SANDBOX, INTERACTION REQUIRED: vim makeFile # change bindir value to /usr/local/bin
+    bash -c "cd force && make -j && make install"
+    
+    # ---------- Installing gsutil (required to download data from Google Cloud using FORCE) ----------
+    # THE FOLLOWING COMMANDS SHOULD BE RUN IN A SANDBOX, INTERACTION REQUIRED 
+    # instructions available on https://cloud.google.com/storage/docs/gsutil_install#deb
+    # echo "deb [signed-by=/usr/share/keyrings/cloud.google.gpg] https://packages.cloud.google.com/apt cloud-sdk main" | sudo tee -a /etc/apt/sources.list.d/google-cloud-sdk.list
+    # apt-get -y install apt-transport-https ca-certificates gnupg
+    # curl https://packages.cloud.google.com/apt/doc/apt-key.gpg | apt-key --keyring /usr/share/keyrings/cloud.google.gpg add -
+    # apt-get -y update && apt-get -y install google-cloud-sdk
+    # gcloud init #INTERACTION REQUIRED
+
     
     # ---------- Install R and dependencies ----------
     apt -y install r-base r-base-dev
@@ -74,6 +87,9 @@ From: davidfrantz/force:dev
     Rscript -e "install.packages('tidyverse')"
     Rscript -e "install.packages('readtext')"  
     Rscript -e "install.packages('lubridate')"
+    Rscript -e "install.packages('parallel')"
+    Rscript -e "install.packages('sf')"
+    Rscript -e "library(devtools);install_github('s-u/unixtools')"
     Rscript -e "library(devtools);install.packages('reticulate')"
     Rscript -e "library(devtools);install_github('RETURN-project/makeDataCube')"
     
