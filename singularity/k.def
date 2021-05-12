@@ -111,6 +111,10 @@ From: davidfrantz/force:dev
 
 %files
    # ---------- add netrc, laads, and boto file (needed to download data when building a data cube) ----------
+   #
+   # Where do I find these files?
+   # - .netrc and .laads: see Requirements section in https://github.com/RETURN-project/makeDataCube/blob/master/vignettes/make_Landsat_cube.Rmd
+   # - .boto: see https://force-eo.readthedocs.io/en/latest/howto/level1-csd.html
     /home/wanda/.netrc /home
     /home/wanda/.laads /home
     /home/wanda/.boto /home
